@@ -150,7 +150,25 @@ class Instructor extends Lambdasian {
   grade(student, subject) {
     return `${student.name} receives a perfect score on ${subject}`;
   }
+
+  // Stretch #1 - "build out a method on the Instructor...that will randomly add or subtract points to a student's grade."
+  randoGrade(grade) {
+    if (Math.random() > 0.5) {
+      grade += 100 * Math.random();
+      return `The student earned a ${grade}`;
+    }
+    else {
+      grade -= 100 * Math.random();
+      return `The student earned a ${grade}`;
+    }
+  }
 }
+
+//Stretch Test #1
+const testInst = new Instructor({
+  name: 'Jaymz'
+})
+console.log(testInst.randoGrade(45));
 
 /*
   TASK 5
@@ -167,12 +185,15 @@ class Instructor extends Lambdasian {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
+
+
 class Student extends Lambdasian {
   constructor(atters) {
     super(atters);
     this.previousBackground = atters.previousBackground;
     this.className = atters.className;
     this.favSubjects = atters.favSubjects;
+    this.studentGrade = atters.studentGrade;
   }
   listSubjects() {
     return `Loving ${this.favSubjects.toString()}`;
@@ -183,7 +204,25 @@ class Student extends Lambdasian {
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}`;
   }
+  // Stretch #2 - Add a graduate method to a student.
+  //     + This method, when called, will check the grade of the student and see if they're ready to graduate from Lambda School
+  // + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
+  graduate() {
+    if (this.studentGrade >= 70) {
+      return `${this.name} earned a ${this.studentGrade}%, congrats on graduating!`;
+    }
+    else {
+      return `Ew, ${this.name} earned a ${this.studentGrade}. They better go study more!`
+    }
+  }
 }
+
+// Stretch Test #2
+const testStud = new Student({
+  name: 'Ben',
+  studentGrade: 71
+})
+console.log(testStud.graduate());
 
 /*
   TASK 6
